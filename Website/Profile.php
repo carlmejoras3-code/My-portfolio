@@ -5,7 +5,7 @@ $biography = "Carl Mejoras is a software developer with a passion for creating i
 $educationalBackground = "Carl Mejoras is studying a Bachelor's degree in BSIT from Mater Dei College.";
 $skills = "PHP, JavaScript, HTML/CSS, MySQL";
 $hobbies = "Editing, Eating, Sleeping, and Gaming";
-$contact = "carlmejoras@gmail.com";
+$contact = "carlmejoras3@gmail.com";
 
 // ---- helpers ----
 function e($text) {
