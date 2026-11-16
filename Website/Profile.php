@@ -7,12 +7,11 @@ $skills = "PHP, JavaScript, HTML/CSS, MySQL";
 $hobbies = "Editing, Eating, Sleeping, and Gaming";
 $contact = "carlmejoras3@gmail.com";
 
-// ---- helpers ----
 function e($text) {
     return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 }
 
-$cleanName = preg_replace('/\s+/', ' ', trim($name));            // collapses the extra spaces
+$cleanName = preg_replace('/\s+/', ' ', trim($name));
 $skillList = array_map('trim', explode(',', $skills));
 $hobbyList = array_map('trim', preg_split('/,\s*(?:and\s+)?/', $hobbies));
 $hasPhoto  = file_exists(__DIR__ . '/' . $profilePhoto);
@@ -30,6 +29,16 @@ foreach (explode(' ', $cleanName) as $part) {
     <title><?php echo e($cleanName); ?> | Portfolio</title>
 
     <style>
+        :root {
+            --color-brand: #2563eb;
+            --color-brand-dark: #1e40af;
+            --color-brand-light: #dbeafe;
+            --color-brand-pale: #eff6ff;
+            --color-ink: #1e3a5f;
+            --color-surface: #fff;
+            --color-shadow: rgba(15, 23, 42, 0.18);
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -39,20 +48,19 @@ foreach (explode(' ', $cleanName) as $part) {
         }
 
         body {
-            background: linear-gradient(to bottom, #4b4b4b, #ffffff) fixed;
+            background: linear-gradient(to bottom, #dbeafe, #f8fafc) fixed;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            color: #222;
+            color: var(--color-ink);
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
 
-        /* ---------- Header / Nav ---------- */
         header {
-            background: linear-gradient(to bottom, #4b4b4b, #ffffff);
-            color: black;
+            background: var(--color-ink);
+            color: var(--color-surface);
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px var(--color-shadow);
             position: sticky;
             top: 0;
             z-index: 10;
@@ -60,7 +68,7 @@ foreach (explode(' ', $cleanName) as $part) {
 
         header h1 {
             margin: 0 0 10px;
-            color: #fff;
+            color: var(--color-surface);
         }
 
         nav {
@@ -70,8 +78,8 @@ foreach (explode(' ', $cleanName) as $part) {
         }
 
         nav a {
-            color: #222;
-            background: rgba(255, 255, 255, 0.85);
+            color: var(--color-ink);
+            background: var(--color-surface);
             text-decoration: none;
             font-weight: 600;
             padding: 6px 16px;
@@ -81,18 +89,17 @@ foreach (explode(' ', $cleanName) as $part) {
 
         nav a:hover,
         nav a:focus-visible {
-            background: #005eff;
-            color: #fff;
+            background: var(--color-brand);
+            color: var(--color-surface);
             outline: none;
         }
 
-        /* ---------- Shared card ---------- */
         .card {
             max-width: 900px;
             margin: 60px auto;
             padding: 40px;
             border-radius: 40px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 8px var(--color-shadow);
             text-align: center;
             font-size: 20px;
             scroll-margin-top: 130px;
@@ -107,10 +114,9 @@ foreach (explode(' ', $cleanName) as $part) {
             margin: 0;
         }
 
-        /* ---------- Profile photo ---------- */
         .root {
-            background: linear-gradient(to right, #4b4b4b, #8a8a8a);
-            color: white;
+            background: linear-gradient(to right, var(--color-ink), #315c91);
+            color: var(--color-surface);
         }
 
         .root img,
@@ -118,7 +124,7 @@ foreach (explode(' ', $cleanName) as $part) {
             width: 200px;
             height: 200px;
             border-radius: 20%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 8px var(--color-shadow);
             object-fit: cover;
         }
 
@@ -126,15 +132,14 @@ foreach (explode(' ', $cleanName) as $part) {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: #005eff;
+            background: var(--color-brand);
             font-size: 64px;
             font-weight: bold;
         }
 
-        /* ---------- Name ---------- */
         .name {
-            background: linear-gradient(to right, #005eff, #4d8dff);
-            color: white;
+            background: linear-gradient(to right, var(--color-brand-dark), var(--color-brand));
+            color: var(--color-surface);
         }
 
         .name p:first-child {
@@ -147,29 +152,15 @@ foreach (explode(' ', $cleanName) as $part) {
             font-size: 34px;
         }
 
-        /* ---------- About ---------- */
         .about {
-            background: linear-gradient(to right, #feb47b, #ff7e5f);
-            color: #2b1a14;
+            background: linear-gradient(to right, var(--color-brand-light), #f8fafc);
+            color: var(--color-ink);
         }
 
-        /* ---------- Info cards (education, skills, hobbies, contact) ---------- */
         .info {
-            background: #fff;
+            background: var(--color-surface);
             text-align: left;
-            border-left: 12px solid #005eff;
-        }
-
-        .info.skills {
-            border-left-color: #ff7e5f;
-        }
-
-        .info.hobbies {
-            border-left-color: #4b4b4b;
-        }
-
-        .info.contact {
-            border-left-color: #005eff;
+            border-left: 12px solid var(--color-brand);
         }
 
         .chips {
@@ -180,32 +171,20 @@ foreach (explode(' ', $cleanName) as $part) {
         }
 
         .chip {
-            background: #eef3ff;
-            color: #003bb3;
-            border: 2px solid #005eff;
+            background: var(--color-brand-pale);
+            color: var(--color-brand-dark);
+            border: 2px solid var(--color-brand);
             border-radius: 20px;
             padding: 4px 16px;
             font-size: 17px;
             font-weight: 600;
         }
 
-        .skills .chip {
-            background: #fff1ec;
-            color: #a8381c;
-            border-color: #ff7e5f;
-        }
-
-        .hobbies .chip {
-            background: #f0f0f0;
-            color: #333;
-            border-color: #4b4b4b;
-        }
-
         .btn {
             display: inline-block;
             margin-top: 10px;
-            background: #005eff;
-            color: #fff;
+            background: var(--color-brand);
+            color: var(--color-surface);
             text-decoration: none;
             font-weight: 600;
             padding: 10px 24px;
@@ -215,21 +194,19 @@ foreach (explode(' ', $cleanName) as $part) {
 
         .btn:hover,
         .btn:focus-visible {
-            background: #003bb3;
-            outline: 3px solid #ff7e5f;
+            background: var(--color-brand-dark);
+            outline: 3px solid var(--color-brand-light);
         }
 
-        /* ---------- Footer ---------- */
         footer {
-            background: #4b4b4b;
-            color: #fff;
+            background: var(--color-ink);
+            color: var(--color-surface);
             text-align: center;
             padding: 20px;
             margin-top: 60px;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 -4px 8px var(--color-shadow);
         }
 
-        /* ---------- Mobile ---------- */
         @media (max-width: 700px) {
             .card {
                 margin: 30px 16px;
